@@ -130,9 +130,9 @@ class _HomeState extends State<Home> {
                   ],
                 ),
               ),
-              ...FallingBouncingTextModes.values.map(
+              ...BouncingTextModes.values.map(
                 (e) {
-                  final index = FallingBouncingTextModes.values.indexOf(e);
+                  final index = BouncingTextModes.values.indexOf(e);
                   return Column(
                     children: [
                       Text(
@@ -145,7 +145,7 @@ class _HomeState extends State<Home> {
                       Container(
                         color: _kColors[index],
                         padding: const EdgeInsets.all(20.0),
-                        child: AnimatedFallingBouncingText(
+                        child: AnimatedBouncingText(
                           key: ValueKey(DateTime.now()),
                           text: '($index) I am\nRomantic Developer.',
                           mode: e,

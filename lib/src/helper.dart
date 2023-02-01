@@ -8,7 +8,7 @@ const _kLineBreakMark = '֍';
 const _kLineBreakChar = '\n';
 const _kSpaceChar = ' ';
 
-enum FallingBouncingTextModes {
+enum BouncingTextModes {
   sequenceOneTime,
   randomlyLoop,
   randomlyOneTime,
@@ -17,7 +17,7 @@ enum FallingBouncingTextModes {
 List<InlineSpan> createAnimatedBouncingSpans(
   String text,
   TextStyle textStyle,
-  FallingBouncingTextModes mode,
+  BouncingTextModes mode,
   Duration characterDuration,
   Duration characterDelay,
   Function? onEnd,
@@ -29,12 +29,11 @@ List<InlineSpan> createAnimatedBouncingSpans(
         mainAxisSize: MainAxisSize.min,
         children: word.characters.map(
           (e) {
-            final delayDuration =
-                mode == FallingBouncingTextModes.randomlyLoop || mode == FallingBouncingTextModes.randomlyOneTime
-                    ? Duration(
-                        milliseconds: Random.secure().nextInt(
-                            characterDuration.inMilliseconds + characterDelay.inMilliseconds * (paragraphIndex + i)))
-                    : Duration(milliseconds: characterDelay.inMilliseconds * (paragraphIndex + i));
+            final delayDuration = mode == BouncingTextModes.randomlyLoop || mode == BouncingTextModes.randomlyOneTime
+                ? Duration(
+                    milliseconds: Random.secure().nextInt(
+                        characterDuration.inMilliseconds + characterDelay.inMilliseconds * (paragraphIndex + i)))
+                : Duration(milliseconds: characterDelay.inMilliseconds * (paragraphIndex + i));
             i++;
             final _onCompleted = i > word.length && wordIndex == wordsLength - 1 ? onEnd : null;
             return FutureBuilder(
@@ -42,9 +41,9 @@ List<InlineSpan> createAnimatedBouncingSpans(
                 if (snapshot.data != 1) {
                   return SizedBox();
                 } else {
-                  return AnimatedFallingBouncingWidget(
+                  return AnimatedBouncingWidget(
                     duration: characterDuration,
-                    isRepeat: mode == FallingBouncingTextModes.randomlyLoop,
+                    isRepeat: mode == BouncingTextModes.randomlyLoop,
                     child: Text(
                       e,
                       style: textStyle,

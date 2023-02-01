@@ -21,13 +21,13 @@ final _kBouncingTweenY = TweenSequence<double>([
   TweenSequenceItem(tween: Tween<double>(begin: 1.5, end: 1), weight: 0.6),
 ]);
 
-class AnimatedFallingBouncingWidget extends StatefulWidget {
+class AnimatedBouncingWidget extends StatefulWidget {
   final Widget child;
   final Duration duration;
   final bool isRepeat;
   final Function? onEnd;
 
-  const AnimatedFallingBouncingWidget({
+  const AnimatedBouncingWidget({
     required this.child,
     Key? key,
     required this.duration,
@@ -36,15 +36,14 @@ class AnimatedFallingBouncingWidget extends StatefulWidget {
   }) : super(key: key);
 
   @override
-  State<AnimatedFallingBouncingWidget> createState() => _AnimatedFallingBouncingWidgetState();
+  State<AnimatedBouncingWidget> createState() => _AnimatedBouncingWidgetState();
 }
 
-class _AnimatedFallingBouncingWidgetState extends State<AnimatedFallingBouncingWidget>
-    with SingleTickerProviderStateMixin {
+class _AnimatedBouncingWidgetState extends State<AnimatedBouncingWidget> with SingleTickerProviderStateMixin {
   late AnimationController _controller;
 
   @override
-  void didUpdateWidget(covariant AnimatedFallingBouncingWidget oldWidget) {
+  void didUpdateWidget(covariant AnimatedBouncingWidget oldWidget) {
     if (widget.isRepeat) _start();
     super.didUpdateWidget(oldWidget);
   }

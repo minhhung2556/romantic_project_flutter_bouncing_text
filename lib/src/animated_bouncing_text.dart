@@ -2,22 +2,22 @@ import 'package:flutter/material.dart';
 
 import 'index.dart';
 
-class AnimatedFallingBouncingText extends StatelessWidget {
+class AnimatedBouncingText extends StatelessWidget {
   final String text;
   final TextStyle textStyle;
-  final FallingBouncingTextModes mode;
+  final BouncingTextModes mode;
   final Duration characterDuration;
   final Duration characterDelay;
   final Function? onEnd;
   final TextAlign textAlign;
 
-  const AnimatedFallingBouncingText({
+  const AnimatedBouncingText({
     Key? key,
     required this.text,
     required this.textStyle,
     this.characterDuration = const Duration(milliseconds: 1000),
     this.characterDelay = const Duration(milliseconds: 300),
-    this.mode = FallingBouncingTextModes.sequenceOneTime,
+    this.mode = BouncingTextModes.sequenceOneTime,
     this.onEnd,
     this.textAlign = TextAlign.start,
   }) : super(key: key);
