@@ -21,12 +21,15 @@ final _kBouncingTweenY = TweenSequence<double>([
   TweenSequenceItem(tween: Tween<double>(begin: 1.5, end: 1), weight: 0.6),
 ]);
 
+/// This is an implicitly animated widget. Its [child] will fall down then bounce in [duration].
+/// If [isRepeat] is true, the animation will be repeat after completed, else [onEnd] will be called.
 class AnimatedBouncingWidget extends StatefulWidget {
   final Widget child;
   final Duration duration;
   final bool isRepeat;
   final Function? onEnd;
 
+  /// Constructor.
   const AnimatedBouncingWidget({
     required this.child,
     Key? key,

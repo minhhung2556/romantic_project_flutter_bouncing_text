@@ -8,20 +8,35 @@ const _kLineBreakMark = '֍';
 const _kLineBreakChar = '\n';
 const _kSpaceChar = ' ';
 
+/// These modes control how the [AnimatedBouncingText] animates.
 enum BouncingTextModes {
+  /// Bouncing each character sequentially then stop.
   sequenceOneTime,
+
+  /// Bouncing each character randomly then loop.
   randomlyLoop,
+
+  /// Bouncing each character randomly then stop.
   randomlyOneTime,
 }
 
-List<InlineSpan> createAnimatedBouncingSpans(
-  String text,
-  TextStyle textStyle,
-  BouncingTextModes mode,
-  Duration characterDuration,
-  Duration characterDelay,
+/// Basically, [AnimatedBouncingText] is a [RichText].
+/// So this a helper method is used to create a list of [WidgetSpan].
+/// Each item is a [AnimatedBouncingWidget].
+/// [mode] : determine how does the animation act.
+/// [text] : each character will be convert to [AnimatedBouncingWidget].
+/// [textStyle] : see [Text.style].
+/// [characterDuration] : duration to animate a character, it will be used as [AnimatedBouncingWidget.duration].
+/// [characterDelay] : duration to delay before animating a character.
+/// [onEnd] : see [AnimatedBouncingWidget.onEnd].
+List<InlineSpan> createAnimatedBouncingSpans({
+  required BouncingTextModes mode,
+  required String text,
+  required TextStyle textStyle,
+  required Duration characterDuration,
+  required Duration characterDelay,
   Function? onEnd,
-) {
+}) {
   InlineSpan _buildAWord(String word, int paragraphIndex, int wordIndex, int wordsLength) {
     int i = 1;
     return WidgetSpan(
