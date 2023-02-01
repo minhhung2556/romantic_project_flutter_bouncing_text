@@ -37,20 +37,26 @@ List<InlineSpan> createAnimatedBouncingSpans({
   required Duration characterDelay,
   Function? onEnd,
 }) {
-  InlineSpan _buildAWord(String word, int paragraphIndex, int wordIndex, int wordsLength) {
+  InlineSpan _buildAWord(
+      String word, int paragraphIndex, int wordIndex, int wordsLength) {
     int i = 1;
     return WidgetSpan(
       child: Row(
         mainAxisSize: MainAxisSize.min,
         children: word.characters.map(
           (e) {
-            final delayDuration = mode == BouncingTextModes.randomlyLoop || mode == BouncingTextModes.randomlyOneTime
+            final delayDuration = mode == BouncingTextModes.randomlyLoop ||
+                    mode == BouncingTextModes.randomlyOneTime
                 ? Duration(
-                    milliseconds: Random.secure().nextInt(
-                        characterDuration.inMilliseconds + characterDelay.inMilliseconds * (paragraphIndex + i)))
-                : Duration(milliseconds: characterDelay.inMilliseconds * (paragraphIndex + i));
+                    milliseconds: Random.secure().nextInt(characterDuration
+                            .inMilliseconds +
+                        characterDelay.inMilliseconds * (paragraphIndex + i)))
+                : Duration(
+                    milliseconds:
+                        characterDelay.inMilliseconds * (paragraphIndex + i));
             i++;
-            final _onCompleted = i > word.length && wordIndex == wordsLength - 1 ? onEnd : null;
+            final _onCompleted =
+                i > word.length && wordIndex == wordsLength - 1 ? onEnd : null;
             return FutureBuilder(
               builder: (context, snapshot) {
                 if (snapshot.data != 1) {
@@ -86,7 +92,8 @@ List<InlineSpan> createAnimatedBouncingSpans({
         style: textStyle,
       );
 
-  final paragraph = text.replaceAll(_kLineBreakChar, '$_kSpaceChar$_kLineBreakMark$_kSpaceChar');
+  final paragraph = text.replaceAll(
+      _kLineBreakChar, '$_kSpaceChar$_kLineBreakMark$_kSpaceChar');
   final words = paragraph.split(_kSpaceChar);
   // final wordsWithoutLineBreak = words.where((e) => e != _kLineBreakMark);
   var spans = <InlineSpan>[];

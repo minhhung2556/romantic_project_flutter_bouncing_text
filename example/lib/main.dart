@@ -105,7 +105,8 @@ class _HomeState extends State<Home> {
                       max: 3,
                       divisions: 10,
                       onChanged: (e) => setState(() {
-                        characterDuration = Duration(milliseconds: (e * 1000).toInt());
+                        characterDuration =
+                            Duration(milliseconds: (e * 1000).toInt());
                       }),
                     ),
                     const SizedBox(

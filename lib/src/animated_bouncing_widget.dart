@@ -42,7 +42,8 @@ class AnimatedBouncingWidget extends StatefulWidget {
   State<AnimatedBouncingWidget> createState() => _AnimatedBouncingWidgetState();
 }
 
-class _AnimatedBouncingWidgetState extends State<AnimatedBouncingWidget> with SingleTickerProviderStateMixin {
+class _AnimatedBouncingWidgetState extends State<AnimatedBouncingWidget>
+    with SingleTickerProviderStateMixin {
   late AnimationController _controller;
 
   @override
@@ -53,11 +54,14 @@ class _AnimatedBouncingWidgetState extends State<AnimatedBouncingWidget> with Si
 
   @override
   void initState() {
-    _controller = AnimationController(vsync: this, duration: widget.duration, value: 1);
+    _controller =
+        AnimationController(vsync: this, duration: widget.duration, value: 1);
     _controller.addListener(() async {
       if (!mounted) return;
       setState(() {});
-      if (widget.isRepeat && _controller.isCompleted && !_controller.isDismissed) {
+      if (widget.isRepeat &&
+          _controller.isCompleted &&
+          !_controller.isDismissed) {
         _start();
       }
     });
@@ -88,11 +92,13 @@ class _AnimatedBouncingWidgetState extends State<AnimatedBouncingWidget> with Si
 
   @override
   Widget build(BuildContext context) {
-    final bouncingValue = CurveTween(curve: Curves.bounceOut).transform(_controller.value);
+    final bouncingValue =
+        CurveTween(curve: Curves.bounceOut).transform(_controller.value);
     final dy = _kFallingTween.transform(bouncingValue);
     final sx = _kBouncingTweenX.transform(bouncingValue);
     final sy = _kBouncingTweenY.transform(bouncingValue);
-    final fadeInValue = CurveTween(curve: Curves.linear).transform(_controller.value);
+    final fadeInValue =
+        CurveTween(curve: Curves.linear).transform(_controller.value);
     final opacity = _kFadeInTween.transform(fadeInValue);
     return Transform.translate(
       offset: Offset(0, dy),
